@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Handler;
+import android.os.StrictMode;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -35,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
                 Class classRead = Class.forName(chatActivityClassName);
                 log.info("Current chatActivity is: " + chatActivityClassName);
                 Utils.CHAT_ACTIVITY = classRead;
+            }
+            if (android.os.Build.VERSION.SDK_INT > 9)
+            {
+                StrictMode.ThreadPolicy policy = new
+                        StrictMode.ThreadPolicy.Builder().permitAll().build();
+                StrictMode.setThreadPolicy(policy);
             }
         } catch (IOException e) {
             e.printStackTrace();
